@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.2.0] - 2023-10-15
+
+### Added
+
+- Effect to increase mole size when clicked.
+
+### Changed
+
+- Increased heading size.
+- Made mole change holes faster.
+
 ## [v1.1.0] - 2023-10-15
 
 ### Changed

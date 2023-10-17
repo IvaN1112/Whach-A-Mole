@@ -10,15 +10,15 @@ let seconds = 0;
 let minutes = 0;
 let lastClickTime = 0;
 let lastHole, newHole;
-let activeHole;
 
 document.addEventListener("DOMContentLoaded", function () {
   mole.classList.add("mole");
-  mole.classList.add("active-mole");
+  mole.classList.add("show-mole");
   mole.draggable = false;
   mole.addEventListener("click", () => {
+    mole.classList.add("clicked-mole");
     const now = Date.now(); // Get the current timestamp
-    if (now - lastClickTime >= 1000) {
+    if (now - lastClickTime >= 700) {
       // Check if at least 1 second has passed since the last click
       setPoints();
       lastClickTime = now; // Update the last click timestamp
@@ -30,11 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function startGame() {
-  timerInterval = setInterval(updateGame, 1000);
+  timerInterval = setInterval(updateGame, 700);
 }
 
 function pauseGame() {
-  removeMole();
+  holes[newHole].removeChild(mole);
   clearInterval(timerInterval);
 }
 
@@ -48,7 +48,6 @@ function resetTimer() {
 }
 
 function updateGame(updating = true) {
-  console.log("works");
   //Updating timer values
   if (updating) {
     seconds++;
@@ -103,16 +102,13 @@ function addMole() {
     newHole = Math.floor(Math.random() * 6);
   }
   holes[newHole].appendChild(mole);
-  mole.classList.add("active-mole");
+  mole.classList.add("show-mole");
   lastClickTime = 0;
   setTimeout(() => {
-    mole.classList.remove("active-mole");
-  }, 1000);
+    mole.classList.remove("clicked-mole");
+    mole.classList.remove("show-mole");
+  }, 700);
   lastHole = newHole;
-}
-
-function removeMole() {
-  holes[newHole].removeChild(mole);
 }
 
 function setTime() {
