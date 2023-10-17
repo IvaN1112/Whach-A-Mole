@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.2.1] - 2023-10-17
+
+### Fixed
+
+- A bug that broken the game after clicking "Start" button more than 1 time
+
 ## [v1.2.0] - 2023-10-15
 
 ### Added
