@@ -1,0 +1,137 @@
+/* removing global margin and padding/setting global border-box */
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*****************
+***** Global classes*****
+ *****************/
+.section-center {
+  width: 95vw;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section {
+  padding: 3.5rem 0;
+}
+.section-title {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.btn {
+  color: white;
+  padding: 0.8rem 2.3rem;
+  text-transform: capitalize;
+  background: transparent;
+  transition: all 0.2s linear;
+  border-radius: 20px;
+}
+.btn:hover {
+  background: transparent;
+}
+
+/*************
+***** Default styles *****
+******/
+
+body {
+  color: #fff;
+  background-color: rgb(42, 147, 222);
+}
+
+header {
+  color: rgb(11, 147, 81);
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+  font-size: 2rem;
+}
+
+html {
+  /*  cursor: url(https://cdn-icons-png.flaticon.com/128/2505/2505252.png), auto; */
+}
+
+/*************
+***** Custom styles *****
+******/
+
+.main-info {
+  display: flex;
+  margin-bottom: 8rem;
+  justify-content: center;
+}
+
+.main-info > *:not(:last-child) {
+  margin-right: 3rem;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 120px;
+}
+
+.hole {
+  flex: 0 0 17%;
+  background-image: url("https://media.istockphoto.com/id/471081443/de/foto/gro%C3%9Fes-loch.jpg?s=1024x1024&w=is&k=20&c=iz6P3cymXMOT-f6_gt0ztmDOxmYTzCARovoVMwn00hQ=");
+  width: 180px;
+  height: 80px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.mole {
+  width: 100px;
+  height: 80px;
+  border-radius: 15px;
+  user-select: none;
+}
+
+.start {
+  border: 2px solid rgb(11, 147, 81);
+}
+
+.start:hover {
+  background: rgb(11, 147, 81);
+}
+
+.pause {
+  border: 2px solid rgb(186, 74, 4);
+}
+
+.pause:hover {
+  background: rgb(212, 85, 6);
+}
+
+.reset {
+  border: 2px solid rgb(11, 133, 147);
+}
+
+.reset:hover {
+  background: rgb(11, 133, 147);
+}
+
+.game-info {
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time {
+  margin-right: 5px;
+}
+
+.points {
+  margin-left: 5px;
+}
+
+.active-mole {
+  z-index: 0;
+}
