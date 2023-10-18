@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const mole = document.createElement("img");
   setupMole(mole);
 
-  let timerInterval;
+  let holeInterval, timerInterval;
   let isGameRunning = false;
   let seconds = 0;
   let minutes = 0;
@@ -26,35 +26,40 @@ document.addEventListener("DOMContentLoaded", function () {
   function startGame() {
     if (!isGameRunning) {
       isGameRunning = true;
-      timerInterval = setInterval(updateGame, MOLE_APPEAR_DELAY);
+      holeInterval = setInterval(addMole, MOLE_APPEAR_DELAY);
+      timerInterval = setInterval(updateTimer, 1000);
     }
   }
 
   function pauseGame() {
     holes[newHole].removeChild(mole);
+    clearInterval(holeInterval);
     clearInterval(timerInterval);
     isGameRunning = false;
   }
 
   function resetGame() {
+    if (holes[newHole].contains(mole)) {
+      holes[newHole].removeChild(mole);
+    }
+    clearInterval(holeInterval);
     clearInterval(timerInterval);
     isGameRunning = false;
     seconds = 0;
     minutes = 0;
     //Clear timer, points and mole
-    updateGame(false);
+    updateTimer(false);
     setPoints(false);
   }
 
   //Updates timer and mole position
-  function updateGame(updating = true) {
+  function updateTimer(updating = true) {
     if (updating) {
       seconds++;
       if (seconds === 60) {
         seconds = 0;
         minutes++;
       }
-      addMole();
     }
 
     setTime();

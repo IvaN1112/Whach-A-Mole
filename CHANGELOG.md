@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.3.0] - 2023-10-17
+
+### Fixed
+
+- timer bug, that used to make timer not accurate
+- made mole disappear when clicking on the reset button
+
 ## [v1.2.1] - 2023-10-17
 
 ### Fixed
