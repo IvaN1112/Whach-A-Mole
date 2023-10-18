@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Start, Pause and Reset game
-  const points = document.querySelector(".points-num");
+  //Global values
   const buttons = document.querySelectorAll("button");
+  const points = document.querySelector(".points-num");
   const holes = document.querySelectorAll(".hole");
   const mole = document.createElement("img");
-  mole.setAttribute("src", "mole.png");
+  setupMole(mole);
 
   let timerInterval;
   let isGameRunning = false;
@@ -12,17 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let minutes = 0;
   let lastClickTime = 0;
   let lastHole, newHole;
-  mole.classList.add("mole");
-  mole.classList.add("show-mole");
-  mole.draggable = false;
-  mole.addEventListener("click", () => {
-    mole.classList.add("clicked-mole");
-    const now = Date.now(); // Get the current timestamp
-    if (now - lastClickTime >= 700) {
-      // Check if at least 1 second has passed since the last click
-      setPoints();
-      lastClickTime = now; // Update the last click timestamp
-    }
+
+  const MOLE_APPEAR_DELAY = 700;
+
+  //Setting up button actions and initial values
+  buttons.forEach((button) => {
+    button.addEventListener("click", handleButtonClick);
   });
 
   setTime();
@@ -31,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function startGame() {
     if (!isGameRunning) {
       isGameRunning = true;
-      timerInterval = setInterval(updateGame, 700);
+      timerInterval = setInterval(updateGame, MOLE_APPEAR_DELAY);
     }
   }
 
@@ -42,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function resetGame() {
-    holes[newHole].removeChild(mole);
     clearInterval(timerInterval);
     isGameRunning = false;
     seconds = 0;
@@ -52,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
     setPoints(false);
   }
 
+  //Updates timer and mole position
   function updateGame(updating = true) {
-    //Updating timer values
     if (updating) {
       seconds++;
       if (seconds === 60) {
@@ -66,40 +60,40 @@ document.addEventListener("DOMContentLoaded", function () {
     setTime();
   }
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      const action = e.currentTarget.classList[0];
-      switch (action) {
-        case "start":
-          startGame();
-          break;
-        case "pause":
-          pauseGame();
-          break;
-        case "reset":
-          resetGame();
-          break;
-        default:
-          console.log("Issue with finding button action:");
-      }
-    });
-  });
+  // Utility functions
 
-  // Move Mole
+  function setTime() {
+    const timeString = `${String(minutes).padStart(2, "0")}:${String(
+      seconds
+    ).padStart(2, "0")}`;
+    document.getElementsByClassName("time")[0].textContent = timeString;
+  }
 
-  // Points
   function setPoints(updating = true) {
     if (updating) {
       let pointsValue = parseInt(points.innerText);
       pointsValue++;
       pointsValue = String(pointsValue);
-      points.innerHTML = pointsValue;
+      points.innerText = pointsValue;
     } else {
-      points.innerHTML = "0";
+      points.innerText = "0";
     }
   }
 
-  // Utility functions
+  function setupMole(mole) {
+    mole.setAttribute("src", "mole.png");
+    mole.classList.add("mole");
+    mole.draggable = false;
+    mole.addEventListener("click", () => {
+      const now = Date.now(); //
+      if (now - lastClickTime >= MOLE_APPEAR_DELAY) {
+        // Check if at least MOLE_APPEAR_DELAY ms has passed since the last click
+        mole.classList.add("clicked-mole");
+        setPoints();
+        lastClickTime = now; // Update the last click timestamp
+      }
+    });
+  }
 
   function addMole() {
     newHole = Math.floor(Math.random() * 6);
@@ -109,17 +103,32 @@ document.addEventListener("DOMContentLoaded", function () {
     holes[newHole].appendChild(mole);
     mole.classList.add("show-mole");
     lastClickTime = 0;
+    //After MOLE_APPEAR_DELAY, remove it from the screen.
     setTimeout(() => {
-      mole.classList.remove("clicked-mole");
-      mole.classList.remove("show-mole");
-    }, 700);
+      removeMole();
+    }, MOLE_APPEAR_DELAY);
     lastHole = newHole;
   }
 
-  function setTime() {
-    const timeString = `${String(minutes).padStart(2, "0")}:${String(
-      seconds
-    ).padStart(2, "0")}`;
-    document.getElementsByClassName("time")[0].textContent = timeString;
+  function removeMole() {
+    mole.classList.remove("clicked-mole");
+    mole.classList.remove("show-mole");
+  }
+
+  function handleButtonClick(e) {
+    const action = e.currentTarget.classList[0];
+    switch (action) {
+      case "start":
+        startGame();
+        break;
+      case "pause":
+        pauseGame();
+        break;
+      case "reset":
+        resetGame();
+        break;
+      default:
+        console.log("Issue with finding button action:");
+    }
   }
 });
