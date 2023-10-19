@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.3.0] - 2023-10-17
+## [v2.0.0] - 2023-10-19
+
+### Added
+
+- Mobile version
+
+## [v1.3.0] - 2023-10-18
 
 ### Fixed
 

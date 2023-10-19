@@ -30,6 +30,7 @@
   background: transparent;
   transition: all 0.2s linear;
   border-radius: 20px;
+  caret-color: green;
 }
 .btn:hover {
   background: transparent;
@@ -50,10 +51,6 @@ header {
   margin-top: 3rem;
   margin-bottom: 4rem;
   font-size: 2.3rem;
-}
-
-html {
-  /*  cursor: url(https://cdn-icons-png.flaticon.com/128/2505/2505252.png), auto; */
 }
 
 /*************
@@ -138,5 +135,41 @@ html {
 }
 
 .clicked-mole {
-  transform: scale(1.05);
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 600px) {
+  .section-center {
+    width: 90vw;
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 20px;
+  }
+  .hole {
+    flex: 0 0 calc(30%); /* 50% width with some spacing in between */
+    width: 20px;
+    margin: 20px 5px; /* Add some margin to create space between items */
+    /* Other styling for your items */
+  }
+
+  .main-info {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    justify-content: center;
+    margin-bottom: 5rem;
+  }
+
+  .main-info > * {
+    flex: 0 0 calc(50% - 10px); /* 50% width with some spacing in between */
+    margin-bottom: 1.2rem; /* Add some margin to create space between items */
+    /* Other styling for your items */
+  }
+
+  .main-info > *:not(:last-child) {
+    margin-right: 1rem;
+  }
 }
